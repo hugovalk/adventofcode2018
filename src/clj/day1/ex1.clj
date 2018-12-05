@@ -2,7 +2,7 @@
   (:require [clojure.java.io :as io]))
 
 (defn get-lines []
-  (with-open [rdr (io/reader "./src/clj/day1/input.txt")]
+  (with-open [rdr (io/reader "./input.txt")]
     (let [l (doall (line-seq rdr))]
       (map (fn [i] (Integer/parseInt i)) l))))
 
@@ -21,8 +21,7 @@
        (recur lines (last sums) (set (concat sums found)))
        (first (filter #(contains? found %1) sums))))))
 
-(defn -main []
-  (let [lines (get-lines)]
-    (println lines)
-    (println (str "The sum is: " (sum lines)))
-    (println (str "The first repeating number is: " (first-repeating lines)))))
+(let [lines (get-lines)]
+  (println lines)
+  (println (str "The sum is: " (sum lines)))
+  (println (str "The first repeating number is: " (first-repeating lines))))

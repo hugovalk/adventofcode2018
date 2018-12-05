@@ -2,7 +2,7 @@
   (:require [clojure.java.io :as io]))
 
 (defn get-lines []
-  (with-open [rdr (io/reader "./src/clj/day2/input.txt")]
+  (with-open [rdr (io/reader "./input.txt")]
     (doall (line-seq rdr))))
 
 (defn find-dupes-triples [lines]
@@ -35,14 +35,13 @@
         (recur r)
         (list f (first match)))))
 
-(defn -main []
-  (let [lines (get-lines)
-        dt (find-dupes-triples lines)
-        dupes (count-dupes dt)
-        triples (count-triples dt)]
-    (println (take 10 lines))
-    (println "#containing 2: " dupes)
-    (println "#containing 3: " triples)
-    (println "Checksum: " (* dupes triples))
-    (println "Similar boxes: " (find-div-1 lines))))
+(let [lines (get-lines)
+      dt (find-dupes-triples lines)
+      dupes (count-dupes dt)
+      triples (count-triples dt)]
+  (println (take 10 lines))
+  (println "#containing 2: " dupes)
+  (println "#containing 3: " triples)
+  (println "Checksum: " (* dupes triples))
+  (println "Similar boxes: " (find-div-1 lines)))
 

@@ -8,7 +8,7 @@
     (map (fn [s] (Integer/parseInt s)))))
 
 (defn get-lines []
-  (with-open [rdr (io/reader "./src/clj/day3/input.txt")]
+  (with-open [rdr (io/reader "./input.txt")]
     (->>
       (line-seq rdr)
       (map parse-line)
@@ -16,7 +16,6 @@
 
 (defn multiple-claimed-inches [])
 
-(defn -main []
-  (let [lines (get-lines)]
-    (println lines)
-    (println "The # of square inches having multiple claims: " (multiple-claimed-inches))))
+(let [lines (get-lines)]
+  (println lines)
+  (println "The # of square inches having multiple claims: " (multiple-claimed-inches)))
