@@ -12,7 +12,7 @@
         (group-by (fn [c] c) s)
         (into {} (map (fn [[k v]] [k (count v)])))
         (vals)
-        (filter (fn [v] (or (= v 2) (= v 3))))
+        (filter (fn [v] (< 1 v 4)))
         (set)))
     lines))
 
