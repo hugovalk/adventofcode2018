@@ -52,12 +52,9 @@
        (map (fn [s] (drop-last s)))
        (flatten)
        (group-by (fn [x] x))
-       (sort-by (fn [x] (count (val x))) >)
-       (first)
-       ((fn [x]
-          (if x
-            (key x)
-            0)))))
+       (into {} (map (fn [[k v]] [k (count v)])))
+       (sort-by val >)
+       (first)))
 
 
 (let [lines (get-lines)]
@@ -66,8 +63,9 @@
         guards (keys sleeps)
         sleepiest-guard (first (first (sort-by val > sleeps)))]
     (println "Sleepiest guard: " sleepiest-guard)
-    (println "Most asleep during minute: " (guard-sleepiest-minute guard-sleeps sleepiest-guard))
+    (println "Most asleep during minute: " (first (guard-sleepiest-minute guard-sleeps sleepiest-guard)))
     (println
       (map vector
-        (map (fn [x] (guard-sleepiest-minute guard-sleeps x)) guards)
-        guards))))
+           guards
+           (map (fn [x] (guard-sleepiest-minute guard-sleeps x)) guards)))))
+
