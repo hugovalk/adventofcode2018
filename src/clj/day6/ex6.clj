@@ -9,6 +9,26 @@
                      (vec)
                      (map (fn [i] (Integer/parseInt (.trim i))))))))))
 
+(defn man-dis [a b]
+  (+
+    (Math/abs (- (first a) (first b)))
+    (Math/abs (- (second a) (second b)))))
 
-(let [lines (get-lines)]
-  (println lines))
+(defn max-xy [lines]
+  (reduce (fn [res l]
+            [(max (first res) (first l))
+             (max (second res) (second l))])
+          [0 0] lines))
+
+(defn world [max]
+  (vec (map (fn [_] (vec (repeat (first max) -1)))
+            (repeat (second max) []))))
+
+(defn print-world [world]
+  (doseq [w world]
+    (println w)))
+
+(let [lines (get-lines)
+      locs (map vector (range (count lines)) lines)
+      max (max-xy lines)]
+  (print-world (world max)))
